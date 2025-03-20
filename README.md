@@ -28,7 +28,7 @@ npm install
 3️⃣ **Set Up Environment Variables**  
 Create a `.env` file in the root directory and add the following:
 ```env
-PORT=5002
+PORT=5003
 MONGO_URI=mongodb+srv://your_username:your_password@cluster0.zosgv.mongodb.net/
 JWT_SECRET=your_jwt_secret
 ```
