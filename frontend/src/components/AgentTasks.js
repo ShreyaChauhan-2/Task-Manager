@@ -1,12 +1,11 @@
-// src/components/AgentTasks.js
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const AgentTasks = () => {
   const { agentId } = useParams();
-  const [tasks, setTasks]   = useState([]);
+  const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError]   = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchTasks = async () => {

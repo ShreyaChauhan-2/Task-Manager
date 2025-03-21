@@ -1,4 +1,5 @@
 require('dotenv').config();
+//upload csv file
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -10,7 +11,7 @@ const csv = require('csv-parser');
 const xlsx = require('xlsx');
 
 const User = require('./models/User');
-const Agent = require('./models/Agent'); // Corrected the import to singular
+const Agent = require('./models/Agents');
 const Task = require('./models/Task');
 const upload = require('./middlewares/upload');
 
@@ -21,7 +22,11 @@ const MONGO_URI = process.env.MONGO_URI;
 
 // Middleware
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:3000",  // Adjust this to your frontend URL
+  methods: "GET,POST",
+  allowedHeaders: "Content-Type,Authorization"
+}));
 
 // Connect to MongoDB
 mongoose
@@ -43,7 +48,10 @@ app.post('/api/register', async (req, res) => {
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ error: 'User already exists.' });
+      return res.status(400).json({
+        error: 'User already exists.',
+        redirectToLogin: true,
+      });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);

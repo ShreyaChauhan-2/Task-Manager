@@ -37,14 +37,23 @@ const Dashboard = () => {
   }, [navigate]);
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
+    <div className="min-h-screen bg-beige flex flex-col items-center p-6">
+      {/* Welcome message at the top with margin from top */}
+      <div className="text-center mb-8 mt-20">
+        <h1 className="text-5xl font-bold text-black-600">Welcome to the Dashboard</h1>
+        {userEmail && (
+          <p className="text-2xl text-green-700 mt-8 font-bold mb-10">
+            Logged in as: <span className="font-semibold">{userEmail}</span>
+          </p>
+        )}
+      </div>
+  
+      {/* Inner Box with Dashboard Content */}
       <div className="max-w-xl mx-auto bg-white rounded-lg shadow p-8 text-center">
-        <h1 className="text-3xl font-bold mb-4">{message}</h1>
-        {userEmail && <p className="text-gray-600 mb-4">Logged in as: {userEmail}</p>}
         <div className="space-y-4">
           <button
             onClick={() => navigate("/add-agent")}
-            className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition"
+            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-900 transition"
           >
             Add Agent & Upload CSV
           </button>
@@ -62,13 +71,13 @@ const Dashboard = () => {
               localStorage.removeItem("agentId");
               navigate("/");
             }}
-            className="w-full bg-red-500 text-white py-2 rounded hover:bg-red-600 transition"
+            className="w-full bg-red-600 text-white py-2 rounded hover:bg-red-800 transition"
           >
             Logout
           </button>
         </div>
       </div>
-
+  
       {/* For agent users, display assigned tasks */}
       {agentId && (
         <div className="max-w-xl mx-auto mt-8">
@@ -77,6 +86,8 @@ const Dashboard = () => {
       )}
     </div>
   );
-};
+  
+  
+};  
 
 export default Dashboard;
